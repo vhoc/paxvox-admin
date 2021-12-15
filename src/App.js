@@ -2,7 +2,6 @@
 import React from 'react';
 
 // Custom Components
-import TopBar from './components/TopBar';
 import RoutesComponent from './RoutesComponent'
 
 // Styles, images, and other assets.
@@ -13,7 +12,6 @@ const App = () => {
     
     <div className="App">
       
-        <TopBar/>
         <RoutesComponent/>              
 
     </div>
