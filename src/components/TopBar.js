@@ -1,25 +1,43 @@
-import React, { useEffect } from 'react'
-import { Navigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
+import useApi from './Helpers'
 
-const TopBar = ( {location, username} ) => {
+const TopBar = ( {location} ) => {
 
-    const logOff = () => {
+    const [username, setUsername] = useState()
+
+    const [auth, setAuth] = useState([])
+
+    const { response, loading, error } = useApi({
+        method: 'get',
+        url: '/validateToken',
+        headers: JSON.stringify({ 'Authorization': localStorage.getItem('token') }),
+    })
+
+    const goTo = useNavigate()
+    /*
+    const validateToken = async () => {
+        const response = await axios.get('https://paxvox.waxy.app/api/validateToken', { headers: {'Authorization': localStorage.getItem('token')} })
+        const name = await response.data.username
+        setUsername(name)
+    }*/
+
+    const logout = () => {
         localStorage.clear()
+        goTo('/')
     }
 
-    
-
     useEffect( () => {
-        if (!username) {
-            localStorage.clear()
-            return <Navigate to='/'/>
-        }
-    }, [username] )
-    
+        if (response !== null) {
+            setAuth(response)
+        }        
+        localStorage.setItem('username', auth)
+    }, [response] )
+
     return (
 
             <Navbar>
@@ -28,7 +46,18 @@ const TopBar = ( {location, username} ) => {
                     <Navbar.Toggle/>
                     <Navbar.Collapse className={`justify-content-end`}>
                         <Navbar.Text>
-                            <Button onClick={() => logOff}>{username}</Button>
+                        {loading ? (
+                            <p>loading...</p>
+                        ) : (
+                            <div>
+                                {error && (
+                                    <div>
+                                        <p>{error.message}</p>
+                                    </div>
+                                )}
+                                <div>{auth && <p>{auth.id}</p>}</div>
+                            </div>
+                        )}
                         </Navbar.Text>
                     </Navbar.Collapse>
                 </Container>

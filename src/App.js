@@ -1,5 +1,5 @@
 // React Libraries and Components
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Custom Components
 import RoutesComponent from './RoutesComponent'
@@ -8,12 +8,19 @@ import RoutesComponent from './RoutesComponent'
 import './App.css';
 
 const App = () => {
+
+  const [username, setUsername] = useState('')
+
+  useEffect( () => {
+    setUsername( localStorage.getItem('username') )
+  }, [])
+ 
   return (
     
     <div className="App">
       
-        <RoutesComponent/>              
-
+        <RoutesComponent username={username}/>
+        
     </div>
 
   );

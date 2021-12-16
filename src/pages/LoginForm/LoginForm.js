@@ -4,26 +4,23 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 // Custom Components
-import { useAuth, useUpdateAuth } from '../../providers/AuthContext'
 
 // Styles, images, and other assets.
 
 /**
  * LoginForm
- * @param {string} _appName
- * @param {string} _redirect
+ * @param {string} appName
+ * @param {string} redirectRoute
  * @returns JSX.element
  */
-const LoginForm = ( { _appName, _redirect } ) => {
+const LoginForm = ( { appName, redirectRoute } ) => {
 
     const [credentials, setCredentials] = useState({username: '', password: ''})
-    const [username, setUsername] = useState('')
 
-    const auth = useAuth()
-    const doAuth = useUpdateAuth()
+    const goTo = useNavigate()
 
     /**
      * tryLogin
@@ -35,16 +32,11 @@ const LoginForm = ( { _appName, _redirect } ) => {
             const response = await axios.post('https://paxvox.waxy.app/api/login', credentials)
             const token = await response.data.token
             
-            localStorage.setItem('token', `Bearer ${token}`)
-            
-            // Validate the token to get the user details and store them into Local Storage
-            const login = await axios.get('https://paxvox.waxy.app/api/validateToken', { headers: { 'Authorization':`${localStorage.getItem('token')}` }} )
-            localStorage.setItem('username', login.data.username)
+            localStorage.setItem('token', `Bearer ${token}`)            
 
-            // Set Context and redirect to protected page.
-            setUsername(login.data.username)
-            doAuth(true)
-            return <Navigate to='/reports'/>
+            // Redirect to protected page.
+            //return <Navigate to={redirectRoute}/>
+            goTo( redirectRoute, {replace: true} )
 
         } catch (exception) {
             switch (exception.response.status) {
@@ -68,22 +60,23 @@ const LoginForm = ( { _appName, _redirect } ) => {
      */
     const onSubmit = event => {
         event.preventDefault()
-        tryLogin()        
+        tryLogin()
     }
+    
 
     // Loads the form when there is a token in localStorage.
     if ( localStorage.getItem('token') ) {
-        return <Navigate to="/reports"/>
+        return <Navigate to={redirectRoute}/>
     }
     
     // Loads the form as soon as we log in. (First time log-in)
-    if( auth ) {
-        return <Navigate to="/reports"/>
-    }
-
+    //if( auth ) {
+    //    return <Navigate to={redirectRoute}/>
+    //}
+    
     return (
         <>
-            <h1>{_appName}</h1>
+            <h1>{appName}</h1>
             <h3>Panel de Administración</h3>
 
             <Form onSubmit={onSubmit}>
