@@ -1,5 +1,5 @@
 // React Libraries and Components
-import React, { useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import Button from 'react-bootstrap/Button'
@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form'
 import { Navigate, useNavigate } from 'react-router-dom'
 
 // Custom Components
+import { useLogin } from '../../components/Api'
 
 // Styles, images, and other assets.
 
@@ -19,6 +20,10 @@ import { Navigate, useNavigate } from 'react-router-dom'
 const LoginForm = ( { appName, redirectRoute } ) => {
 
     const [credentials, setCredentials] = useState({username: '', password: ''})
+    const fieldUsernameRef = useRef()
+    const fieldPasswordRef = useRef()
+
+    const { response, loading, error } = useLogin(credentials)
 
     const goTo = useNavigate()
 
@@ -32,10 +37,9 @@ const LoginForm = ( { appName, redirectRoute } ) => {
             const response = await axios.post('https://paxvox.waxy.app/api/login', credentials)
             const token = await response.data.token
             
-            localStorage.setItem('token', `Bearer ${token}`)            
+            localStorage.setItem('token', `Bearer ${token}`)
 
             // Redirect to protected page.
-            //return <Navigate to={redirectRoute}/>
             goTo( redirectRoute, {replace: true} )
 
         } catch (exception) {
@@ -60,19 +64,35 @@ const LoginForm = ( { appName, redirectRoute } ) => {
      */
     const onSubmit = event => {
         event.preventDefault()
-        tryLogin()
+
+        setCredentials({ ...credentials,
+            username: fieldUsernameRef.current.value,
+            password:fieldPasswordRef.current.value
+        })
+        //tryLogin()
+        //const { response, loading, error } = useLogin(credentials)
+        
     }
     
 
     // Loads the form when there is a token in localStorage.
+    /*
     if ( localStorage.getItem('token') ) {
         return <Navigate to={redirectRoute}/>
-    }
+    }*/
     
     // Loads the form as soon as we log in. (First time log-in)
     //if( auth ) {
     //    return <Navigate to={redirectRoute}/>
     //}
+
+    useEffect(() => {
+        if(response !== null) {
+            console.log(response.token)
+            localStorage.setItem('token', `Bearer ${response.token}`)
+            goTo( redirectRoute, {replace: true} )
+        }
+    })
     
     return (
         <>
@@ -83,23 +103,17 @@ const LoginForm = ( { appName, redirectRoute } ) => {
 
                 <Form.Group className='mb-2'>
                     <Form.Control
+                        ref={fieldUsernameRef}
                         type={'username'}
                         placeholder={'E-mail'}
-                        onChange={event => setCredentials({
-                            ...credentials,
-                            username: event.target.value
-                        })}
                     />
                 </Form.Group>
                 
                 <Form.Group className='mb-2'>
                     <Form.Control
+                        ref={fieldPasswordRef}
                         type={'password'}
                         placeholder={'Contraseña'}
-                        onChange={event => setCredentials({
-                            ...credentials,
-                            password: event.target.value
-                        })}
                     />
                 </Form.Group>
 

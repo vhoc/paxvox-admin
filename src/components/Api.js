@@ -15,13 +15,41 @@ const useValidateToken = (token) => {
             setError(await err)
         } finally {
             setLoading(false)
-        }
-        
+        }        
     }
 
     useEffect(() => {
         getUser()
     }, [token])
+
+    return { response, error, loading }
+
+}
+
+export const useLogin = ( credentials = {} ) => {
+
+    const [response, setResponse] = useState(null)
+    const [error, setError] = useState('')
+    const [loading, setLoading] = useState(true)
+
+    const getToken = async () => {
+
+        try {
+            const res = await axios.post('https://paxvox.waxy.app/api/login', credentials)
+            setResponse(await res.data)
+        } catch (err) {
+            setError(await err)
+        } finally {
+            setLoading(false)
+        }        
+    }
+
+    useEffect(() => {
+        if ( credentials.password === '' && credentials.username === '' ) {
+            return
+        }
+        getToken()
+    }, [credentials])
 
     return { response, error, loading }
 
