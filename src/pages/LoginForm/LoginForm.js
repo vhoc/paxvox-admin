@@ -30,6 +30,7 @@ const LoginForm = ( { appName, redirectRoute } ) => {
     /**
      * tryLogin
      */
+    /*
     const tryLogin = async () => {
         try {
 
@@ -56,7 +57,7 @@ const LoginForm = ( { appName, redirectRoute } ) => {
                     break;
             }
         }
-    }
+    }*/
 
     /**
      * onSubmit
@@ -87,8 +88,20 @@ const LoginForm = ( { appName, redirectRoute } ) => {
     //}
 
     useEffect(() => {
-        if(response !== null) {
-            console.log(response.token)
+        
+        /**
+         * AQuí me quedé. Debo ver la forma de validar response, error y loading
+         * en la forma más práctica y simple posible. Quizás juntarlos en un
+         * sólo objeto NO anónimo sea la respuesta.
+         * 
+         * Problema:
+         * Al haber un error de autenticación, se generan dos popups de Sweetalert.
+         */
+        if (error) {
+            Swal.fire("Error", error.message, "error")
+        }
+        
+        if (response !== null) {
             localStorage.setItem('token', `Bearer ${response.token}`)
             goTo( redirectRoute, {replace: true} )
         }
@@ -116,8 +129,6 @@ const LoginForm = ( { appName, redirectRoute } ) => {
                         placeholder={'Contraseña'}
                     />
                 </Form.Group>
-
-                
 
                 <Button type='submit' variant='success'>Ingresar</Button>
 
