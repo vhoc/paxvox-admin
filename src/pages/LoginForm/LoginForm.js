@@ -1,15 +1,12 @@
 // React Libraries and Components
 import React, { useEffect, useState, useRef } from 'react'
-import axios from 'axios'
 import Swal from 'sweetalert2'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 // Custom Components
 import { useLogin } from '../../components/Api'
-
-// Styles, images, and other assets.
 
 /**
  * LoginForm
@@ -23,41 +20,9 @@ const LoginForm = ( { appName, redirectRoute } ) => {
     const fieldUsernameRef = useRef()
     const fieldPasswordRef = useRef()
 
-    const { response, loading, error } = useLogin(credentials)
+    const login = useLogin(credentials)
 
     const goTo = useNavigate()
-
-    /**
-     * tryLogin
-     */
-    /*
-    const tryLogin = async () => {
-        try {
-
-            // Login to the API to get the token
-            const response = await axios.post('https://paxvox.waxy.app/api/login', credentials)
-            const token = await response.data.token
-            
-            localStorage.setItem('token', `Bearer ${token}`)
-
-            // Redirect to protected page.
-            goTo( redirectRoute, {replace: true} )
-
-        } catch (exception) {
-            switch (exception.response.status) {
-                case 422:
-                    Swal.fire("Error", "Se requiere ingresar el usuario y la contraseña correctamente.", "error")
-                    break;
-                case 401:
-                    Swal.fire("Error", "Se ha ingresado un usuario o contraseña incorrecto(s).", "error")
-                    break;
-                default:
-                    Swal.fire("Error", `Error desconocido: (${exception.response.data})`, "error")
-                    console.log(`${exception.message}`)
-                    break;
-            }
-        }
-    }*/
 
     /**
      * onSubmit
@@ -69,43 +34,30 @@ const LoginForm = ( { appName, redirectRoute } ) => {
         setCredentials({ ...credentials,
             username: fieldUsernameRef.current.value,
             password:fieldPasswordRef.current.value
-        })
-        //tryLogin()
-        //const { response, loading, error } = useLogin(credentials)
-        
+        })        
     }
     
-
-    // Loads the form when there is a token in localStorage.
-    /*
-    if ( localStorage.getItem('token') ) {
-        return <Navigate to={redirectRoute}/>
-    }*/
-    
-    // Loads the form as soon as we log in. (First time log-in)
-    //if( auth ) {
-    //    return <Navigate to={redirectRoute}/>
-    //}
-
     useEffect(() => {
         
-        /**
-         * AQuí me quedé. Debo ver la forma de validar response, error y loading
-         * en la forma más práctica y simple posible. Quizás juntarlos en un
-         * sólo objeto NO anónimo sea la respuesta.
-         * 
-         * Problema:
-         * Al haber un error de autenticación, se generan dos popups de Sweetalert.
-         */
-        if (error) {
-            Swal.fire("Error", error.message, "error")
+        if (login.error) {
+            switch (login.error.response.status) {
+                case 422: Swal.fire("Error", "Se requiere ingresar el usuario y la contraseña correctamente", "error" )
+                    break;
+                case 401: Swal.fire("Error", "Se ha ingresado un usuario o contraseña incorrecto(s).", "error")
+                    break;
+                default:
+                    Swal.fire("Error", `Error: (${login.error.message})`, "error")
+                    console.log(`${login.error.message}`)
+                    break;
+            }
         }
-        
-        if (response !== null) {
-            localStorage.setItem('token', `Bearer ${response.token}`)
+
+        if (login.response !== null) {
+            localStorage.setItem('token', `Bearer ${login.response.token}`)
             goTo( redirectRoute, {replace: true} )
         }
-    })
+        
+    }, [login.error, login.response])
     
     return (
         <>
