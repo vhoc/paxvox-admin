@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Report = ( name ) => {
+const Report = ( { name, type } ) => {
     
     return (
 
