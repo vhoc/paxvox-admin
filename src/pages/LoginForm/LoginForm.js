@@ -17,26 +17,43 @@ import { useLogin } from '../../components/Api'
 const LoginForm = ( { appName, redirectRoute } ) => {
 
     const [credentials, setCredentials] = useState({username: '', password: ''})
+    const [filledForm, setFilledForm] = useState(false)
     const fieldUsernameRef = useRef()
     const fieldPasswordRef = useRef()
-
+    const buttonSubmitRef = useRef()
     const login = useLogin(credentials)
-
     const goTo = useNavigate()
 
     /**
+     * Handlers
+     */
+    const handleUsernameField = () => {
+        if (fieldPasswordRef.current.value && fieldUsernameRef.current.value) {
+            setFilledForm(true)
+        } else {
+            setFilledForm(false)
+        }
+    }
+
+    /**
      * onSubmit
-     * @param {event} event 
+     * @param {event} event
      */
     const onSubmit = event => {
+
         event.preventDefault()
 
         setCredentials({ ...credentials,
             username: fieldUsernameRef.current.value,
-            password:fieldPasswordRef.current.value
-        })        
+            password: fieldPasswordRef.current.value
+        })
+
     }
     
+    /**
+     * useEffect
+     * @dependencies [login.error, login.response, filledForm]
+     */
     useEffect(() => {
         
         if (login.error) {
@@ -57,7 +74,7 @@ const LoginForm = ( { appName, redirectRoute } ) => {
             goTo( redirectRoute, {replace: true} )
         }
         
-    }, [login.error, login.response])
+    }, [login.error, login.response, filledForm])
     
     return (
         <>
@@ -71,6 +88,7 @@ const LoginForm = ( { appName, redirectRoute } ) => {
                         ref={fieldUsernameRef}
                         type={'username'}
                         placeholder={'E-mail'}
+                        onChange={handleUsernameField}
                     />
                 </Form.Group>
                 
@@ -79,10 +97,18 @@ const LoginForm = ( { appName, redirectRoute } ) => {
                         ref={fieldPasswordRef}
                         type={'password'}
                         placeholder={'Contraseña'}
+                        onChange={handleUsernameField}
                     />
                 </Form.Group>
 
-                <Button type='submit' variant='success'>Ingresar</Button>
+                <Button
+                    ref={buttonSubmitRef}
+                    type='submit'
+                    variant='success'
+                    disabled={!filledForm}
+                >
+                    Ingresar
+                </Button>
 
             </Form>
         </>
