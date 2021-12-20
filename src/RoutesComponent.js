@@ -12,7 +12,7 @@ const RoutesComponent = ( {username} ) => {
 
             <Routes>
               <Route exact path='/' element={ <LoginForm appName={'Encuestas Mariscos El Rey'} redirectRoute={`/reports`} /> }/>
-              <Route exact path='/reports' element={ <Reports username={username} /> } />
+              <Route exact path='/reports' element={ <Reports username={username} location={'1'}/> } />
             </Routes>
 
         </BrowserRouter>

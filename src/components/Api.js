@@ -1,6 +1,12 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
+/**
+ * useValidateToken
+ * 
+ * @param {string} token 
+ * @returns 
+ */
 const useValidateToken = (token) => {
 
     const [response, setResponse] = useState(null)
@@ -26,6 +32,12 @@ const useValidateToken = (token) => {
 
 }
 
+/**
+ * useLogin
+ * 
+ * @param {object} credentials 
+ * @returns 
+ */
 export const useLogin = ( credentials = {} ) => {
 
     const [response, setResponse] = useState(null)
@@ -50,6 +62,37 @@ export const useLogin = ( credentials = {} ) => {
         }
         getToken()
     }, [credentials])
+
+    return { response, error, loading }
+
+}
+
+/**
+ * useWaiters
+ * 
+ */
+export const useWaiters = (location) => {
+
+    const [response, setResponse] = useState(null)
+    const [error, setError] = useState('')
+    const [loading, setLoading] = useState(true)
+
+    const getWaiters = async() => {
+
+        try {
+            const res = await axios.get(`https://paxvox.waxy.app/api/waiters/${location}`, { headers: {Authorization: localStorage.getItem('token')} })
+            setResponse(await res.data)
+        } catch (err) {
+            setError(await err)
+        } finally {
+            setLoading(true)
+        }
+
+    }
+
+    useEffect(() => {
+        getWaiters()
+    }, [location])
 
     return { response, error, loading }
 
