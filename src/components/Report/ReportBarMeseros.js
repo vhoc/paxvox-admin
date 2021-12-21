@@ -2,25 +2,10 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Chart from 'react-apexcharts'
 
-const ReportBarMeseros = ()=> {
+const ReportBarMeseros = ( { startDate, endDate } )=> {
 
     const [meserosNames, setMeserosNames] = useState([])
     const [meserosCount, setMeserosCount] = useState([])
-
-    const dummyData = [
-        {
-            "name": "Alberto Ochoa",
-            "count": 12
-        },
-        {
-            "name": "Gonzalo Gorostiaga",
-            "count": 17
-        },
-        {
-            "name": "Victor Olvera",
-            "count": 5
-        }
-    ]
     
     // Esa constante va a ir aqui dentro del componente,
     // Los props meserosNames y meserosCount vendrán desde el padre del componente.
@@ -39,15 +24,15 @@ const ReportBarMeseros = ()=> {
             }
         },
         series: [{
-          name: 'series-1',
+          name: 'encuestas',
           data: meserosCount
         }]
     }
 
     const getData = async () => {
 
-        const startDate = new Date(2021, 11, 1, 0, 0, 0)// Pendiente, checar TimeZone
-        const endDate = new Date(Date.now())
+        setMeserosNames([])
+        setMeserosCount([])
 
         const requestData = {
             "id_location": 1,
@@ -62,7 +47,6 @@ const ReportBarMeseros = ()=> {
         }
 
         const response = await axios.post(`https://paxvox.waxy.app/api/reports/meseros`, requestData, requestOptions)
-        console.log(response.data)
         response.data.map( item => {
             setMeserosNames( meserosNames => [...meserosNames, item.name] )
             setMeserosCount( meserosCount => [...meserosCount, item.count] )
@@ -72,12 +56,12 @@ const ReportBarMeseros = ()=> {
 
     useEffect(() => {
         getData()
-    }, [])
+    }, [startDate, endDate])
 
     return (
 
         <>
-            <h4>Reporte</h4>
+            <h5>Participación de Meseros</h5>
             <Chart options={chartOptions.options} series={chartOptions.series} type={"bar"} width={500} height={320}/>
         </>
         
