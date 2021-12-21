@@ -4,7 +4,7 @@ import ReactApexChart from "react-apexcharts"
 
 const ReportPieFrecuenciaVisita = ( { startDate, endDate } ) => {
 
-  const [series, setSeries] = useState([])
+  const [series, setSeries] = useState([0,0,0,0])
 
   const chartOptions = {
     series: series,
@@ -30,25 +30,25 @@ const ReportPieFrecuenciaVisita = ( { startDate, endDate } ) => {
 
     const getData = async () => {
       
-    const requestData = {
-      "id_location": 1,
-      "start_date": startDate.toISOString(),
-      "end_date": endDate.toISOString()
-    }
-    
-    const requestOptions = {
-      headers: {
-        'Content-Type': 'application/json',
+      const requestData = {
+        "id_location": 1,
+        "start_date": startDate.toISOString(),
+        "end_date": endDate.toISOString()
       }
+      
+      const requestOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }
+
+      const response = await axios.post( 'https://paxvox.waxy.app/api/reports/frecuencia', requestData, requestOptions )
+      const object = await response.data
+      const responseArray = Object.values(object)
+      console.log(responseArray)
+      setSeries( responseArray )
+
     }
-
-    const response = await axios.post( 'https://paxvox.waxy.app/api/reports/frecuencia', requestData, requestOptions )
-    const object = await response.data
-    const responseArray = Object.values(object)
-    console.log(responseArray)
-    setSeries( responseArray )
-
-  }
 
     useEffect(()=> {
       getData()
