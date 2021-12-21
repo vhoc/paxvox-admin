@@ -45,7 +45,6 @@ const ReportPieFrecuenciaVisita = ( { startDate, endDate } ) => {
       const response = await axios.post( 'https://paxvox.waxy.app/api/reports/frecuencia', requestData, requestOptions )
       const object = await response.data
       const responseArray = Object.values(object)
-      console.log(responseArray)
       setSeries( responseArray )
 
     }
