@@ -5,10 +5,12 @@ import DatePicker from 'react-datepicker'
 import TopBar from '../../components/TopBar'
 import ReportBarMeseros from '../../components/Report/ReportBarMeseros'
 import ReportPieFrecuenciaVisita from '../../components/Report/ReportPieFrecuenciaVisita'
+import ReportPieChart from '../../components/Report/ReportPieChart'
 
 const Reports = ( {username} ) => {
 
-    const [startDate, setStartDate] = useState(new Date())
+    const currentDate = new Date()
+    const [startDate, setStartDate] = useState(new Date(currentDate.getFullYear(), currentDate.getMonth(), 1))
     const [endDate, setEndDate] = useState(new Date())
 
     /**
@@ -17,27 +19,27 @@ const Reports = ( {username} ) => {
     if (!localStorage.getItem('token')) {
         return <Navigate to='/' />
     }
-
-        
     
     return (
         
         <div>
             <TopBar location={'Mariscos El Rey Obregón'} username={ username }/>
             <h3>{ 'Reportes' }</h3>
-            <div className='d-flex my-5'>
-                <div>
+            <div className='d-flex my-5 justify-content-center'>
+                <div className='col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2 p-1'>
                     <span>Fecha inicial</span>
                     <DatePicker
+                        className="col-12"
                         selected={startDate}
                         onChange={date => setStartDate(date)}
                         placeholderText="Fecha de inicio"
                     />
                 </div>
 
-                <div>
+                <div className='col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2 p-1'>
                     <span>Fecha final</span>
                     <DatePicker
+                        className="col-12"
                         selected={endDate}
                         onChange={date => setEndDate(date)}
                         placeholderText="Fecha final"
@@ -45,9 +47,25 @@ const Reports = ( {username} ) => {
                 </div>
                 
             </div>
-            <div>
+            <div className='d-flex flex-wrap justify-content-center'>
+
                 <ReportBarMeseros startDate={startDate} endDate={endDate}/>
-                <ReportPieFrecuenciaVisita startDate={startDate} endDate={endDate} />
+
+                <ReportPieChart
+                    title={`Frecuencia de Visita`}
+                    endpoint={`frecuenciaVisita`}
+                    startDate={startDate}
+                    endDate={endDate}
+                    labels={ ['Primera visita', 'Más de 1 vez al Año', 'Más de 1 vez al Mes', 'Más de 1 vez a la Semana']}
+                />
+
+                <ReportPieChart
+                    title={`Atención del Mesero`}
+                    endpoint={`atencionMesero`}
+                    startDate={startDate}
+                    endDate={endDate}
+                    labels={ [ 'Muy Mala', 'Mala', 'Regular', 'Buena', 'Excelente' ] }
+                />
             </div>
         </div>
          

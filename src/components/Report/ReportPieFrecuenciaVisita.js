@@ -5,17 +5,18 @@ import ReactApexChart from "react-apexcharts"
 const ReportPieFrecuenciaVisita = ( { startDate, endDate } ) => {
 
   const [series, setSeries] = useState([0,0,0,0])
+  const labels = ['Primera Visita', 'Mas de 1 vez al Año', 'Mas de 1 vez al Mes', 'Mas de 1 vez a la Semana']
 
   const chartOptions = {
     series: series,
       options: {
         chart: {
-          width: 380,
+          width: 468,
           type: 'pie',
         },
-        labels: ['Primera Visita', 'Mas de 1 vez al Año', 'Mas de 1 vez al Mes', 'Mas de 1 vez a la Semana'],
+        labels: labels,
         responsive: [{
-          breakpoint: 480,
+          breakpoint: 468,
           options: {
             chart: {
               width: 200
@@ -54,10 +55,10 @@ const ReportPieFrecuenciaVisita = ( { startDate, endDate } ) => {
     }, [startDate, endDate])
 
     return (
-        <>
+        <div className="border d-flex flex-column align-items-center m-1 p-1 rounded">
           <h5>Frecuencia de Visita</h5>
-          <ReactApexChart options={chartOptions.options} series={chartOptions.series} type={"pie"} width={500} />
-        </>
+          <ReactApexChart options={chartOptions.options} series={chartOptions.series} type={"pie"} width={468} />
+        </div>
     )
 
 }
