@@ -11,20 +11,20 @@ const useValidateToken = (token) => {
 
     const [response, setResponse] = useState(null)
     const [error, setError] = useState('')
-    const [loading, setLoading] = useState(true)
-
-    const getUser = async () => {
-        try {
-            const res = await axios.get('https://paxvox.waxy.app/api/validateToken', { headers: {'Authorization': token} })
-            setResponse( await res.data )
-        } catch (err) {
-            setError(await err)
-        } finally {
-            setLoading(false)
-        }        
-    }
+    const [loading, setLoading] = useState(true)    
 
     useEffect(() => {
+        const getUser = async () => {
+            try {
+                const res = await axios.get('https://paxvox.waxy.app/api/validateToken', { headers: {'Authorization': token} })
+                setResponse( await res.data )
+            } catch (err) {
+                setError(await err)
+            } finally {
+                setLoading(false)
+            }        
+        }
+
         getUser()
     }, [token])
 
@@ -44,21 +44,20 @@ export const useLogin = ( credentials = {} ) => {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(true)
 
-    const getToken = async () => {
-
-        try {
-            const res = await axios.post('https://paxvox.waxy.app/api/login', credentials)
-            setResponse(await res.data)
-        } catch (err) {
-            setError(await err)
-        } finally {
-            setLoading(false)
-        }        
-    }
-
     useEffect(() => {
         if ( credentials.password === '' && credentials.username === '' ) {
             return
+        }
+        const getToken = async () => {
+
+            try {
+                const res = await axios.post('https://paxvox.waxy.app/api/login', credentials)
+                setResponse(await res.data)
+            } catch (err) {
+                setError(await err)
+            } finally {
+                setLoading(false)
+            }        
         }
         getToken()
     }, [credentials])
@@ -77,20 +76,19 @@ export const useWaiters = (location) => {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(true)
 
-    const getWaiters = async() => {
-
-        try {
-            const res = await axios.get(`https://paxvox.waxy.app/api/waiters/${location}`, { headers: {Authorization: localStorage.getItem('token')} })
-            setResponse(await res.data)
-        } catch (err) {
-            setError(await err)
-        } finally {
-            setLoading(true)
-        }
-
-    }
-
     useEffect(() => {
+        const getWaiters = async() => {
+
+            try {
+                const res = await axios.get(`https://paxvox.waxy.app/api/waiters/${location}`, { headers: {Authorization: localStorage.getItem('token')} })
+                setResponse(await res.data)
+            } catch (err) {
+                setError(await err)
+            } finally {
+                setLoading(true)
+            }
+    
+        }
         getWaiters()
     }, [location])
 

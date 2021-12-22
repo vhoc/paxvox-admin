@@ -32,7 +32,7 @@ const TopBar = ( {location} ) => {
 
     return (
 
-            <Navbar className={classes.topbar}>
+            <Navbar className={classes.topbar} sticky='top'>
                 <Container>
                     <Navbar.Brand href="/"><small>{location}</small></Navbar.Brand>
                     <Navbar.Toggle/>

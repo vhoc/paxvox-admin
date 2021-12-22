@@ -17,7 +17,7 @@ const App = () => {
  
   return (
     
-    <div className="App">
+    <div className="App p-0">
       
         <RoutesComponent username={username}/>
         

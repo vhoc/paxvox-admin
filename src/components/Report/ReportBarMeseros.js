@@ -23,38 +23,40 @@ const ReportBarMeseros = ( { startDate, endDate } )=> {
             categories: meserosNames
             }
         },
+        noData: {
+            text: 'Cargando...'
+        },
         series: [{
           name: 'encuestas',
           data: meserosCount
         }]
     }
 
-    const getData = async () => {
-
-        setMeserosNames([])
-        setMeserosCount([])
-
-        const requestData = {
-            "id_location": 1,
-            "start_date":startDate.toISOString(),
-            "end_date":endDate.toISOString()
-        }
-
-        const requestOptions = {
-            headers: {
-                'Content-Type':'application/json',
-            }
-        }
-
-        const response = await axios.post(`https://paxvox.waxy.app/api/reports/meseros`, requestData, requestOptions)
-        response.data.map( item => {
-            setMeserosNames( meserosNames => [...meserosNames, item.name] )
-            setMeserosCount( meserosCount => [...meserosCount, item.count] )
-        } )
-
-    }
-
     useEffect(() => {
+        const getData = async () => {
+
+            setMeserosNames([])
+            setMeserosCount([])
+    
+            const requestData = {
+                "id_location": 1,
+                "start_date":startDate.toISOString(),
+                "end_date":endDate.toISOString()
+            }
+    
+            const requestOptions = {
+                headers: {
+                    'Content-Type':'application/json',
+                }
+            }
+    
+            const response = await axios.post(`https://paxvox.waxy.app/api/reports/meseros`, requestData, requestOptions)
+            response.data.map( item => {
+                setMeserosNames( meserosNames => [...meserosNames, item.name] )
+                setMeserosCount( meserosCount => [...meserosCount, item.count] )
+            } )
+    
+        }
         getData()
     }, [startDate, endDate])
 
