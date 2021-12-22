@@ -4,7 +4,6 @@ import DatePicker from 'react-datepicker'
 
 import TopBar from '../../components/TopBar'
 import ReportBarMeseros from '../../components/Report/ReportBarMeseros'
-import ReportPieFrecuenciaVisita from '../../components/Report/ReportPieFrecuenciaVisita'
 import ReportPieChart from '../../components/Report/ReportPieChart'
 
 const Reports = ( {username} ) => {
@@ -64,8 +63,33 @@ const Reports = ( {username} ) => {
                     endpoint={`atencionMesero`}
                     startDate={startDate}
                     endDate={endDate}
-                    labels={ [ 'Muy Mala', 'Mala', 'Regular', 'Buena', 'Excelente' ] }
+                    labels={ [ 'Muy Mal', 'Mal', 'Regular', 'Bien', 'Excelente' ] }
                 />
+
+                <ReportPieChart
+                    title={`Rapidez en el Servicio`}
+                    endpoint={`rapidezServicio`}
+                    startDate={startDate}
+                    endDate={endDate}
+                    labels={ [ 'Muy Mal', 'Mal', 'Regular', 'Bien', 'Excelente' ] }
+                />
+
+                <ReportPieChart
+                    title={`Sabor y Calidad de la Comida`}
+                    endpoint={`calidadComida`}
+                    startDate={startDate}
+                    endDate={endDate}
+                    labels={ [ 'Muy Mal', 'Mal', 'Regular', 'Bien', 'Excelente' ] }
+                />
+
+                <ReportPieChart
+                    title={`Experiencia General`}
+                    endpoint={`experienciaGeneral`}
+                    startDate={startDate}
+                    endDate={endDate}
+                    labels={ [ 'Muy Mal', 'Mal', 'Regular', 'Bien', 'Excelente' ] }
+                />
+
             </div>
         </div>
          

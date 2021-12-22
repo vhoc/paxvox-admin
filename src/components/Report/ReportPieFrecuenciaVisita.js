@@ -55,7 +55,7 @@ const ReportPieFrecuenciaVisita = ( { startDate, endDate } ) => {
     }, [startDate, endDate])
 
     return (
-        <div className="border d-flex flex-column align-items-center m-1 p-1 rounded">
+        <div className="border d-flex flex-column align-items-center m-1 p-1 pt-3 rounded shadow">
           <h5>Frecuencia de Visita</h5>
           <ReactApexChart options={chartOptions.options} series={chartOptions.series} type={"pie"} width={468} />
         </div>

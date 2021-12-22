@@ -6,11 +6,11 @@ const ReportPieChart = ( { title, endpoint, startDate, endDate, labels } ) => {
 
     const [series, setSeries] = useState([0,0,0,0,0])
     const colors = [
-        '#800000',
         '#ff3300',
-        '#ffcc00',
+        '#ff6600',
+        '#ffcf24',
         '#cccc00',
-        '#00cc00'
+        '#00cc66'
     ]
 
     const chartOptions = {
@@ -63,7 +63,7 @@ const ReportPieChart = ( { title, endpoint, startDate, endDate, labels } ) => {
     }, [startDate, endDate, labels])
 
     return (
-        <div className="border d-flex flex-column align-items-center m-1 p-1 rounded">
+        <div className="border d-flex flex-column align-items-center m-1 p-1 pt-3 rounded shadow">
           <h5>{title}</h5>
           <ReactApexChart options={chartOptions.options} series={chartOptions.series} type={"pie"} width={468} />
         </div>

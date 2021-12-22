@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import { Alert } from 'react-bootstrap'
 
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
-//import useApi from './Helpers'
 import useValidateToken from './Api'
+
+import classes from './TopBar.module.css'
 
 const TopBar = ( {location} ) => {
 
@@ -31,12 +32,12 @@ const TopBar = ( {location} ) => {
 
     return (
 
-            <Navbar>
+            <Navbar className={classes.topbar}>
                 <Container>
                     <Navbar.Brand href="/"><small>{location}</small></Navbar.Brand>
                     <Navbar.Toggle/>
                     <Navbar.Collapse className={`justify-content-end`}>
-                        <Navbar.Text>
+                        <Navbar.Text className={classes.text}>
                         {loading ? (
                             <p>cargando...</p>
                         ) : (
