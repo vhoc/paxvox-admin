@@ -12,7 +12,7 @@ const ReportBarMeseros = ( { startDate, endDate } )=> {
     const chartOptions = {
         options: {
             chart: {
-            id: 'apexchart-example'
+            id: 'participacion-meseros'
             },
             plotOptions: {
                 bar: {
@@ -27,7 +27,7 @@ const ReportBarMeseros = ( { startDate, endDate } )=> {
             text: 'Cargando...'
         },
         series: [{
-          name: 'encuestas',
+          name: 'Encuestas',
           data: meserosCount
         }]
     }
@@ -64,7 +64,7 @@ const ReportBarMeseros = ( { startDate, endDate } )=> {
 
         <div className='border d-flex flex-column align-items-center m-1 p-1 pt-3 rounded shadow'>
             <h5>Participación de Meseros</h5>
-            <Chart options={chartOptions.options} series={chartOptions.series} type={"bar"} width={468}/>
+            <Chart options={chartOptions.options} series={chartOptions.series} type={"bar"} width={'400px'} height={'100%'}/>
         </div>
         
     )

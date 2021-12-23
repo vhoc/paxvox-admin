@@ -71,6 +71,7 @@ const LoginForm = ( { appName, redirectRoute } ) => {
 
         if (login.response !== null) {
             localStorage.setItem('token', `Bearer ${login.response.token}`)
+            localStorage.setItem('location_name', `${login.response.name_location}`)
             goTo( redirectRoute, {replace: true} )
         }
         

@@ -8,7 +8,7 @@ import useValidateToken from './Api'
 
 import classes from './TopBar.module.css'
 
-const TopBar = ( {location} ) => {
+const TopBar = ( ) => {
 
     const [auth, setAuth] = useState([])
 
@@ -26,15 +26,21 @@ const TopBar = ( {location} ) => {
         if (response !== null) {
             setAuth(response)
             localStorage.setItem('username', response.username)
+            //localStorage.setItem('location_name', response.name_location)
         }
+        console.log(response)
     }, [response] )
 
     return (
 
             <Navbar className={classes.topbar} sticky='top'>
                 <Container>
-                    <Navbar.Brand href="/"><small>{location}</small></Navbar.Brand>
+                    <Navbar.Brand href="/">
+                        <small>{localStorage.getItem('location_name')}</small>
+                    </Navbar.Brand>
+
                     <Navbar.Toggle/>
+                    
                     <Navbar.Collapse className={`justify-content-end`}>
                         <Navbar.Text className={classes.text}>
                         {loading ? (

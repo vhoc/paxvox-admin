@@ -29,14 +29,16 @@ const ReportPieChart = ( { title, endpoint, startDate, endDate, labels } ) => {
                     donut: {
                         labels: {
                             show: true,
-                        }
-                    }
+                        },
+                        size: '50%',
+                    },
+                    customScale: 0.9,
                 }
             },
             dataLabels: {
                 enabled: true,
                 style: {
-                    fontSize: '1em'
+                    fontSize: '1.0em'
                 },
                 formatter: (val, opts) => {
                     return `${opts.w.config.series[opts.seriesIndex]} 
@@ -80,7 +82,7 @@ const ReportPieChart = ( { title, endpoint, startDate, endDate, labels } ) => {
     return (
         <div className="border d-flex flex-column align-items-center m-1 p-1 pt-3 rounded shadow">
           <h5>{title}</h5>
-          <ReactApexChart options={chartOptions.options} series={chartOptions.series} type={"donut"} width={468} />
+          <ReactApexChart options={chartOptions.options} series={chartOptions.series} type={"donut"} width={'400px'} height={`100%`}/>
         </div>
     )
 
