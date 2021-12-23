@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
-import { Alert } from 'react-bootstrap'
 
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
@@ -39,13 +38,11 @@ const TopBar = ( {location} ) => {
                     <Navbar.Collapse className={`justify-content-end`}>
                         <Navbar.Text className={classes.text}>
                         {loading ? (
-                            <p>cargando...</p>
+                            <div><p className='text-white'><strong>Cargando...</strong></p></div>
                         ) : (
                             <div>
                                 {error && (
-                                    <div>
-                                        <Alert variant='danger'>{error.message}</Alert>
-                                    </div>
+                                    <Navigate to="/" />
                                 )}
                                 <div>{auth && <div><span>{auth.username}</span><Button variant='link' onClick={() => logout()}>Salir</Button></div>}</div>
                             </div>

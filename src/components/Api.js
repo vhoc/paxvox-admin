@@ -19,6 +19,8 @@ const useValidateToken = (token) => {
                 const res = await axios.get('https://paxvox.waxy.app/api/validateToken', { headers: {'Authorization': token} })
                 setResponse( await res.data )
             } catch (err) {
+                localStorage.removeItem('username')
+                localStorage.removeItem('token')
                 setError(await err)
             } finally {
                 setLoading(false)

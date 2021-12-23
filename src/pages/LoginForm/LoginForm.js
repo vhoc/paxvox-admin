@@ -1,5 +1,5 @@
 // React Libraries and Components
-import React, { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Swal from 'sweetalert2'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
@@ -74,7 +74,8 @@ const LoginForm = ( { appName, redirectRoute } ) => {
             goTo( redirectRoute, {replace: true} )
         }
         
-    }, [login.error, login.response, filledForm])
+    })
+    //, [login.error, login.response, filledForm] <--- Removed this from the UseEffect up here.
     
     return (
         <>

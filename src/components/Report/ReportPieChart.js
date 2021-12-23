@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import ReactApexChart from "react-apexcharts"
 
-const ReportPieChart = ( { title, endpoint, startDate, endDate, labels, percentages } ) => {
+const ReportPieChart = ( { title, endpoint, startDate, endDate, labels } ) => {
 
     const [series, setSeries] = useState([0,0,0,0,0])
 
@@ -14,11 +14,16 @@ const ReportPieChart = ( { title, endpoint, startDate, endDate, labels, percenta
         '#40bf80'
     ]
 
-    let chartOptions = {
+    const chartOptions = {
         series: series,
           options: {
             colors: colors,
             labels: labels,
+            legend: {
+                position: 'top',
+                horizontalAlign: 'center',
+                inverseOrder: true,
+            },
             plotOptions: {
                 pie: {
                     donut: {
@@ -31,17 +36,15 @@ const ReportPieChart = ( { title, endpoint, startDate, endDate, labels, percenta
             dataLabels: {
                 enabled: true,
                 style: {
-                    fontSize: '0.8em'
+                    fontSize: '1em'
                 },
                 formatter: (val, opts) => {
-
-                    if ( percentages === false ) {
-                        return opts.w.config.series[opts.seriesIndex];
-                    } else {
-                        return Math.round(val) + "%";
-                    }
-                    //return opts.w.config.series[opts.seriesIndex] + "(" + Math.round(val) + "%)"
+                    return `${opts.w.config.series[opts.seriesIndex]} 
+                    (${Math.round(val)}%)`
                 },
+                dropShadow: {
+                    enabled: true,
+                }
             },
             
         }
@@ -77,7 +80,6 @@ const ReportPieChart = ( { title, endpoint, startDate, endDate, labels, percenta
     return (
         <div className="border d-flex flex-column align-items-center m-1 p-1 pt-3 rounded shadow">
           <h5>{title}</h5>
-          
           <ReactApexChart options={chartOptions.options} series={chartOptions.series} type={"donut"} width={468} />
         </div>
     )

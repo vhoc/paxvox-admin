@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import DatePicker from 'react-datepicker'
-import { Form } from 'react-bootstrap'
 
 import TopBar from '../../components/TopBar'
 import ReportBarMeseros from '../../components/Report/ReportBarMeseros'
@@ -12,7 +11,6 @@ const Reports = ( {username} ) => {
     const currentDate = new Date()
     const [startDate, setStartDate] = useState(new Date(currentDate.getFullYear(), currentDate.getMonth(), 1))
     const [endDate, setEndDate] = useState(new Date())
-    const [percentages, setPercentages] = useState(false)
 
     /**
      * Authentication checks
@@ -49,17 +47,7 @@ const Reports = ( {username} ) => {
                 
             </div>
 
-            <div className='d-flex justify-content-start px-5'>
-                <Form.Switch
-                    type="switch"
-                    label="Porcentajes"
-                    onChange={() => {
-                        setPercentages(percentages => !percentages)
-                    }}
-                />
-            </div>
-
-            <div className='d-flex flex-wrap justify-content-center'>
+           <div className='d-flex flex-wrap justify-content-center'>
 
                 <ReportBarMeseros startDate={startDate} endDate={endDate}/>
 
@@ -69,7 +57,6 @@ const Reports = ( {username} ) => {
                     startDate={startDate}
                     endDate={endDate}
                     labels={ ['Primera visita', 'Más de 1 vez al Año', 'Más de 1 vez al Mes', 'Más de 1 vez a la Semana']}
-                    percentages={percentages}
                 />
 
                 <ReportPieChart
@@ -77,8 +64,7 @@ const Reports = ( {username} ) => {
                     endpoint={`atencionMesero`}
                     startDate={startDate}
                     endDate={endDate}
-                    labels={ [ 'Muy Mal', 'Mal', 'Regular', 'Bien', 'Excelente' ] }
-                    percentages={percentages}
+                    labels={ [ 'Muy Mal', 'Mal', 'Regular', 'Bien', 'Excelente' ] }                               
                 />
 
                 <ReportPieChart
@@ -87,7 +73,6 @@ const Reports = ( {username} ) => {
                     startDate={startDate}
                     endDate={endDate}
                     labels={ [ 'Muy Mal', 'Mal', 'Regular', 'Bien', 'Excelente' ] }
-                    percentages={percentages}
                 />
 
                 <ReportPieChart
@@ -96,7 +81,6 @@ const Reports = ( {username} ) => {
                     startDate={startDate}
                     endDate={endDate}
                     labels={ [ 'Muy Mal', 'Mal', 'Regular', 'Bien', 'Excelente' ] }
-                    percentages={percentages}
                 />
 
                 <ReportPieChart
@@ -105,7 +89,6 @@ const Reports = ( {username} ) => {
                     startDate={startDate}
                     endDate={endDate}
                     labels={ [ 'Muy Mal', 'Mal', 'Regular', 'Bien', 'Excelente' ] }
-                    percentages={percentages}
                 />
 
             </div>

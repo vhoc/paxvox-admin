@@ -51,7 +51,7 @@ const ReportBarMeseros = ( { startDate, endDate } )=> {
             }
     
             const response = await axios.post(`https://paxvox.waxy.app/api/reports/meseros`, requestData, requestOptions)
-            response.data.map( item => {
+            response.data.forEach( item => {
                 setMeserosNames( meserosNames => [...meserosNames, item.name] )
                 setMeserosCount( meserosCount => [...meserosCount, item.count] )
             } )
