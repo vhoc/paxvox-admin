@@ -26,9 +26,7 @@ const TopBar = ( ) => {
         if (response !== null) {
             setAuth(response)
             localStorage.setItem('username', response.username)
-            //localStorage.setItem('location_name', response.name_location)
         }
-        console.log(response)
     }, [response] )
 
     return (

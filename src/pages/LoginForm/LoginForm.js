@@ -79,17 +79,20 @@ const LoginForm = ( { appName, redirectRoute } ) => {
     //, [login.error, login.response, filledForm] <--- Removed this from the UseEffect up here.
     
     return (
-        <>
+        <div className='p-3 col-12 d-flex flex-column justify-content-center align-items-center'>
+
+            
+
             <h1>{appName}</h1>
             <h3>Panel de Administración</h3>
-
+            <div className='col-8 col-md-6 col-lg-4 col-xl-3'>
             <Form onSubmit={onSubmit}>
 
                 <Form.Group className='mb-2'>
                     <Form.Control
                         ref={fieldUsernameRef}
                         type={'username'}
-                        placeholder={'E-mail'}
+                        placeholder={'Nombre de Usuario o E-mail'}
                         onChange={handleUsernameField}
                     />
                 </Form.Group>
@@ -106,14 +109,16 @@ const LoginForm = ( { appName, redirectRoute } ) => {
                 <Button
                     ref={buttonSubmitRef}
                     type='submit'
-                    variant='success'
+                    variant='primary'
                     disabled={!filledForm}
                 >
                     Ingresar
                 </Button>
 
             </Form>
-        </>
+
+            </div>
+        </div>
 
     )
 
