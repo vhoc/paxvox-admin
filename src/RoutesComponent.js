@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import LoginForm from './pages/LoginForm/LoginForm';
 import Reports from './pages/Reports/Reports';
 
-const RoutesComponent = ( {username, locationName} ) => {
+const RoutesComponent = ( {username} ) => {
     return (
 
         <BrowserRouter>

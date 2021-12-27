@@ -35,7 +35,7 @@ const useValidateToken = (token) => {
 }
 
 /**
- * useLogin
+ * HOOK: useLogin
  * 
  * @param {object} credentials 
  * @returns 
