@@ -1,0 +1,22 @@
+@media print {
+
+    @page {
+        size: letter landscape;
+    }
+
+    html {
+        transform: scale(0.6);
+        transform-origin: 0 0;
+
+        height: 90%;
+    }
+    
+    .print-hidden {
+        display: none;
+    }
+    
+    .reports-container {
+        width: 165%;
+    }
+
+}

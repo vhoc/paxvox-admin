@@ -2,21 +2,3 @@
   text-align: center;
   padding: 1rem;
 }
-
-@media print {
-  @page {
-    size: landscape;
-  }
-  body * {
-    visibility: hidden;
-  }
-  .section-to-print, .section-to-print * {
-    visibility: visible;
-  }
-  .section-to-print {
-    /*position: relative;*/
-    /*left: 0;*/
-    /*top: 0;*/
-    /*transform: scale(0.7);*/
-  }
-}

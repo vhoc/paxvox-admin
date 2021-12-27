@@ -11,3 +11,12 @@
 .topbar button {
     color: cornflowerblue;
 }
+
+@media print {
+
+    .topbar {
+        position: relative;
+        visibility: hidden;
+        margin-top: -100px;
+    }
+}
