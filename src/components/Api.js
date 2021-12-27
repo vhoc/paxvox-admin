@@ -40,6 +40,7 @@ const useValidateToken = (token) => {
  * @param {object} credentials 
  * @returns 
  */
+/*
 export const useLogin = ( credentials = {} ) => {
 
     const [response, setResponse] = useState(null)
@@ -66,7 +67,7 @@ export const useLogin = ( credentials = {} ) => {
 
     return { response, error, loading }
 
-}
+}*/
 
 /**
  * useWaiters

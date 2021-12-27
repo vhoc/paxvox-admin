@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker'
 import TopBar from '../../components/TopBar'
 import ReportBarMeseros from '../../components/Report/ReportBarMeseros'
 import ReportPieChart from '../../components/Report/ReportPieChart'
+import './../../App.css'
 
 const Reports = ( {username} ) => {
 
@@ -16,15 +17,16 @@ const Reports = ( {username} ) => {
      * Authentication checks
      */
     if (!localStorage.getItem('token')) {
+        localStorage.clear();
         return <Navigate to='/' />
     }
     
     return (
         
-        <div>
+        <div >
             <TopBar location={'Mariscos El Rey Obregón'} username={ username }/>
             <h3>{ 'Reportes' }</h3>
-            <div className='d-flex my-5 justify-content-center'>
+            <div className='d-flex my-5 justify-content-center section-to-print'>
                 <div className='col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2 p-1'>
                     <span>Fecha inicial</span>
                     <DatePicker
@@ -47,11 +49,16 @@ const Reports = ( {username} ) => {
                 
             </div>
 
-           <div className='d-flex flex-wrap justify-content-center'>
+           <div className='d-flex flex-wrap justify-content-around section-to-print'>
 
-                <ReportBarMeseros startDate={startDate} endDate={endDate}/>
+                <ReportBarMeseros
+                    className='flex-fill'
+                    startDate={startDate}
+                    endDate={endDate}
+                />
 
                 <ReportPieChart
+                    className='flex-fill'
                     title={`Frecuencia de Visita`}
                     endpoint={`frecuenciaVisita`}
                     startDate={startDate}
@@ -60,6 +67,7 @@ const Reports = ( {username} ) => {
                 />
 
                 <ReportPieChart
+                    className='flex-fill'
                     title={`Atención del Mesero`}
                     endpoint={`atencionMesero`}
                     startDate={startDate}
@@ -68,6 +76,7 @@ const Reports = ( {username} ) => {
                 />
 
                 <ReportPieChart
+                    className='flex-fill'
                     title={`Rapidez en el Servicio`}
                     endpoint={`rapidezServicio`}
                     startDate={startDate}
@@ -76,6 +85,7 @@ const Reports = ( {username} ) => {
                 />
 
                 <ReportPieChart
+                    className='flex-fill'
                     title={`Sabor y Calidad de la Comida`}
                     endpoint={`calidadComida`}
                     startDate={startDate}
@@ -84,6 +94,7 @@ const Reports = ( {username} ) => {
                 />
 
                 <ReportPieChart
+                    className='flex-fill'
                     title={`Experiencia General`}
                     endpoint={`experienciaGeneral`}
                     startDate={startDate}
