@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 import ReactApexChart from "react-apexcharts"
+import './ReportPieChart.css'
 
 const ReportPieChart = ( { title, endpoint, startDate, endDate, labels } ) => {
 
@@ -80,8 +81,9 @@ const ReportPieChart = ( { title, endpoint, startDate, endDate, labels } ) => {
     }, [startDate, endDate, endpoint])
 
     return (
-        <div className="border d-flex flex-column align-items-center m-1 p-1 pt-3 rounded shadow">
+        <div className="chartbox border d-flex flex-column align-items-center m-1 p-1 pt-3 rounded shadow">
           <h5>{title}</h5>
+          <span className="text-secondary">{ `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}` }</span>
           <ReactApexChart options={chartOptions.options} series={chartOptions.series} type={"donut"} width={'400px'} height={`100%`}/>
         </div>
     )

@@ -1,17 +1,34 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import DatePicker from 'react-datepicker'
+import axios from 'axios'
 
 import TopBar from '../../components/TopBar'
 import ReportBarMeseros from '../../components/Report/ReportBarMeseros'
 import ReportPieChart from '../../components/Report/ReportPieChart'
 import './Reports.css'
 
-const Reports = ( {username} ) => {
+const Reports = ( {username, location} ) => {
 
     const currentDate = new Date()
     const [startDate, setStartDate] = useState(new Date(currentDate.getFullYear(), currentDate.getMonth(), 1))
     const [endDate, setEndDate] = useState(new Date())
+    const [locationName, setLocationName] = useState('Cargando...')
+
+    useEffect(() => {
+        const getLocation = async () => {
+            try {
+                const response = await axios.get( `https://paxvox.waxy.app/api/location/${location}` )
+                console.log(response.data.name)
+                setLocationName( await response.data.name )
+            } catch (error) {
+                setLocationName( `Error al obtener el nombre de la ubicación.` )
+            }
+        }
+
+        getLocation()
+
+    }, [])
 
     /**
      * Authentication checks
@@ -23,11 +40,11 @@ const Reports = ( {username} ) => {
     
     return (
         
-        <div >
-            <TopBar location={'Mariscos El Rey Obregón'} username={ username }/>
+        <div className='border d-flex flex-column justify-content-start'>
+            <TopBar location={locationName} username={ username }/>
             <div className='reports-container'>
                 <h3 className='print-hidden'>{ 'Reportes' }</h3>
-                <div className='d-flex my-5 justify-content-center section-to-print dates-control'>
+                <div className='d-flex my-5 justify-content-center dates-control print-hidden'>
                     <div className='col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2 p-1'>
                         <span>Fecha inicial</span>
                         <DatePicker
@@ -48,6 +65,10 @@ const Reports = ( {username} ) => {
                         />
                     </div>
                     
+                </div>
+
+                <div className='d-flex justify-content-center section-to-print'>
+                    <h4 className='text-primary'>{locationName}</h4>
                 </div>
 
                 <div className='d-flex flex-wrap justify-content-around section-to-print'>
