@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
+import DatePicker from 'react-datepicker'
 import axios from 'axios'
+import Navbar from 'react-bootstrap/Navbar'
 
 import TopBar from '../../components/TopBar'
 import DateSelector from '../../components/Report/DateSelector'
@@ -42,12 +44,28 @@ const Reports = ( {username, location} ) => {
         <div className='d-flex flex-column justify-content-start'>
             <TopBar location={locationName} username={ username }/>
 
-            <DateSelector
-                handleChangeStartDate={ periodDates => setStartDate(periodDates) }
-                handleChangeEndDate={ periodDates => setEndDate(periodDates) }
-                startDate={startDate}
-                endDate={endDate}
-            />
+            <Navbar className='d-flex justify-content-center align-items-start section-to-print mb-3 text-white pb-2 date-selector' sticky='top'>
+                <div className='col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2 p-1'>
+                    <span>Desde:</span>
+                    <DatePicker
+                        className="col-12 text-center form-control p-0"
+                        selected={startDate}
+                        onChange={date => setStartDate(date)}
+                        placeholderText="Desde:"
+                    />
+                </div>
+                <div className='col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2 p-1'>
+                    <span>Hasta:</span>
+                    <DatePicker
+                        className="col-12 text-center form-control p-0"
+                        selected={endDate}
+                        onChange={date => setEndDate(date)}
+                        placeholderText="Hasta:"
+                    />
+                </div>
+            </Navbar>
+
+            <DateSelector />
 
             <div className='d-flex flex-column justify-content-start reports-container mt-3'>               
 

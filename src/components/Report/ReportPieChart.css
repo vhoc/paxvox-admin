@@ -1,12 +1,3 @@
 .chartbox {
     max-height: 125mm;
 }
-/*
-@media print {
-
-    .chartbox {
-        display: block;
-        break-inside: avoid;
-    }
-    
-}*/

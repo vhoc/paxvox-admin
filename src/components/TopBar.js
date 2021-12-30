@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 
-import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import useValidateToken from './Api'
 
@@ -32,19 +31,18 @@ const TopBar = ( ) => {
     return (
 
             <Navbar className={classes.topbar} sticky='top'>
-                <Container>
                     <Navbar.Brand href="/">
                         <small>{localStorage.getItem('location_name')}</small>
                     </Navbar.Brand>
 
                     <Navbar.Toggle/>
                     
-                    <Navbar.Collapse className={`justify-content-end`}>
+                    <Navbar.Collapse className={`justify-content-end collapse`}>
                         <Navbar.Text className={classes.text}>
                         {loading ? (
                             <div><p className='text-white'><strong>Cargando...</strong></p></div>
                         ) : (
-                            <div>
+                            <div className={classes.rightPane}>
                                 {error && (
                                     <Navigate to="/" />
                                 )}
@@ -53,7 +51,6 @@ const TopBar = ( ) => {
                         )}
                         </Navbar.Text>
                     </Navbar.Collapse>
-                </Container>
             </Navbar>
 
     )

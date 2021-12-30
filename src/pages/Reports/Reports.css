@@ -1,20 +1,8 @@
+.date-selector {
+    background-color: steelblue;
+}
+
 @media print { 
-    /*
-    @page {
-        size: 80mm 100mm landscape;
-        margin: 0.5cm;
-    }*/
-    
-
-    
-    /*
-    .print-hidden {
-        visibility: hidden;
-        position: absolute;
-        top: 10mm;
-       margin-top: -20mm;
-    }*/
-
     
     html {
         transform: scale(0.55);
@@ -29,7 +17,6 @@
         width: 165%;
         height: 120%;
     }
-
     
     .reports-container {
         margin-top: 0mm;
@@ -37,39 +24,3 @@
     }
 
 }
-/*
-@media print {
-    canvas.chart-canvas {
-        min-height: 100%;
-        max-width: 100%;
-        max-height: 100%;
-        height: auto!important;
-        width: auto!important;
-    }
-}*/
-
-/* This works in Chrome */
-/*
-@media print {
-
-    @page {
-        size: letter landscape;
-    }
-
-    html {
-        transform: scale(0.6);
-        transform-origin: 0 0;
-
-        height: 70%;
-    }
-    
-    .print-hidden {
-        display: none;
-    }
-    
-    .reports-container {
-        width: 165%;
-    }
-
-}
-*/

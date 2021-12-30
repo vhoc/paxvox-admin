@@ -1,0 +1,18 @@
+.date-selector {
+    background-color: steelblue;
+}
+
+.date-picker {
+    cursor: pointer;
+}
+
+@media print {
+    .date-selector {
+        background-color: white !important;
+        width: 25%;
+    }
+
+    .date-selector span {
+        color: black;
+    }
+}

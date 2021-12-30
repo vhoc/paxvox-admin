@@ -1,6 +1,8 @@
 .topbar {
     background: rgb(63,94,251);
     background: linear-gradient(90deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+    padding-left: 1rem;
+    padding-right: 1rem;
     /*margin-bottom: 1rem;*/
 }
 
@@ -15,8 +17,17 @@
 @media print {
 
     .topbar {
+        background: unset;
+    }
+
+    .topbar small, .topbar span {
+        color: black;
+        font-weight: bold;
+        font-size: 1.6em;
+    }
+
+    .rightPane {
         position: relative;
         visibility: hidden;
-        margin-top: -100px;
     }
 }
