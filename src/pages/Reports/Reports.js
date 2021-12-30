@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import DatePicker from 'react-datepicker'
 import axios from 'axios'
+import Navbar from 'react-bootstrap/Navbar'
 
 import TopBar from '../../components/TopBar'
 import ReportBarMeseros from '../../components/Report/ReportBarMeseros'
@@ -19,7 +20,6 @@ const Reports = ( {username, location} ) => {
         const getLocation = async () => {
             try {
                 const response = await axios.get( `https://paxvox.waxy.app/api/location/${location}` )
-                console.log(response.data.name)
                 setLocationName( await response.data.name )
             } catch (error) {
                 setLocationName( `Error al obtener el nombre de la ubicación.` )
@@ -28,7 +28,7 @@ const Reports = ( {username, location} ) => {
 
         getLocation()
 
-    }, [])
+    }, [location])
 
     /**
      * Authentication checks
@@ -40,36 +40,31 @@ const Reports = ( {username, location} ) => {
     
     return (
         
-        <div className='border d-flex flex-column justify-content-start'>
+        <div className='d-flex flex-column justify-content-start'>
             <TopBar location={locationName} username={ username }/>
-            <div className='reports-container'>
-                <h3 className='print-hidden'>{ 'Reportes' }</h3>
-                <div className='d-flex my-5 justify-content-center dates-control print-hidden'>
-                    <div className='col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2 p-1'>
-                        <span>Fecha inicial</span>
-                        <DatePicker
-                            className="col-12"
-                            selected={startDate}
-                            onChange={date => setStartDate(date)}
-                            placeholderText="Fecha de inicio"
-                        />
-                    </div>
 
-                    <div className='col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2 p-1'>
-                        <span>Fecha final</span>
-                        <DatePicker
-                            className="col-12"
-                            selected={endDate}
-                            onChange={date => setEndDate(date)}
-                            placeholderText="Fecha final"
-                        />
-                    </div>
-                    
+            <Navbar className='d-flex justify-content-center align-items-start section-to-print mb-3 bg-primary text-white pb-2' sticky='top'>
+                <div className='col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2 p-1'>
+                    <span>Fecha inicial</span>
+                    <DatePicker
+                        className="col-12 text-center form-control p-0"
+                        selected={startDate}
+                        onChange={date => setStartDate(date)}
+                        placeholderText="Fecha de inicio"
+                    />
                 </div>
+                <div className='col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2 p-1'>
+                    <span>Fecha final</span>
+                    <DatePicker
+                        className="col-12 text-center form-control p-0"
+                        selected={endDate}
+                        onChange={date => setEndDate(date)}
+                        placeholderText="Fecha final"
+                    />
+                </div>
+            </Navbar>
 
-                <div className='d-flex justify-content-center section-to-print'>
-                    <h4 className='text-primary'>{locationName}</h4>
-                </div>
+            <div className='d-flex flex-column justify-content-start reports-container mt-3'>               
 
                 <div className='d-flex flex-wrap justify-content-around section-to-print'>
 

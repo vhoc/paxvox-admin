@@ -47,24 +47,22 @@ const LoginForm = ( {appName, redirectRoute} ) => {
 
     const onSubmit = event => {
         event.preventDefault()
-        console.log(credentials)
         getToken()
     }
 
-    const handleValidateEmpty = () => {
+
+    const handleInputValues = () => {
         if (fieldPasswordRef.current.value && fieldUsernameRef.current.value) {
+            setCredentials({...credentials,
+                username: fieldUsernameRef.current.value,
+                password: fieldPasswordRef.current.value
+           })
             setFilledForm(true)
         } else {
             setFilledForm(false)
         }
     }
 
-    const handleInputValues = () => {
-        setCredentials({...credentials,
-             username: fieldUsernameRef.current.value,
-             password: fieldPasswordRef.current.value
-        })
-    }
 
     return (
         <div className='p-3 col-12 d-flex flex-column justify-content-center align-items-center'>
@@ -79,8 +77,7 @@ const LoginForm = ( {appName, redirectRoute} ) => {
                         ref={fieldUsernameRef}
                         type={'username'}
                         placeholder={'Nombre de Usuario o E-mail'}
-                        onBlur={handleInputValues}
-                        onChange={handleValidateEmpty}
+                        onChange={handleInputValues}
                     />
                 </Form.Group>
                 
@@ -89,8 +86,7 @@ const LoginForm = ( {appName, redirectRoute} ) => {
                         ref={fieldPasswordRef}
                         type={'password'}
                         placeholder={'Contraseña'}
-                        onBlur={handleInputValues}
-                        onChange={handleValidateEmpty}
+                        onChange={handleInputValues}
                     />
                 </Form.Group>
 

@@ -1,7 +1,7 @@
 .chartbox {
-    max-height: 120mm;
+    max-height: 125mm;
 }
-
+/*
 @media print {
 
     .chartbox {
@@ -9,4 +9,4 @@
         break-inside: avoid;
     }
     
-}
+}*/

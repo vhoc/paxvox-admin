@@ -64,9 +64,9 @@ const ReportBarMeseros = ( { startDate, endDate } )=> {
 
     return (
 
-        <div className='chartbox border d-flex flex-column align-items-start m-1 p-1 pt-3 rounded shadow'>
+        <div className='chartbox border d-flex flex-column align-items-center m-1 p-1 pt-3 rounded shadow'>
             <h5>Participación de Meseros</h5>
-            <Chart options={chartOptions.options} series={chartOptions.series} type={"bar"} width={'400px'} height={'95%'}/>
+            <Chart options={chartOptions.options} series={chartOptions.series} type={"bar"} width={'400px'} />
         </div>
         
     )

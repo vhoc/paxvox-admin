@@ -84,7 +84,7 @@ const ReportPieChart = ( { title, endpoint, startDate, endDate, labels } ) => {
         <div className="chartbox border d-flex flex-column align-items-center m-1 p-1 pt-3 rounded shadow">
           <h5>{title}</h5>
           <span className="text-secondary">{ `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}` }</span>
-          <ReactApexChart options={chartOptions.options} series={chartOptions.series} type={"donut"} width={'400px'} height={`100%`}/>
+          <ReactApexChart options={chartOptions.options} series={chartOptions.series} type={"donut"} width={'400px'} />
         </div>
     )
 
