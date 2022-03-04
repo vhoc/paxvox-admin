@@ -1,6 +1,7 @@
 {
   "name": "paxvox-admin",
   "version": "0.1.0",
+  "homepage": "https://paxvox.waxy.app/admin",
   "private": true,
   "dependencies": {
     "@react-pdf/renderer": "^2.0.21",

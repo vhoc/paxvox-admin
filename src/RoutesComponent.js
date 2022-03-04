@@ -10,8 +10,8 @@ const RoutesComponent = ( {username} ) => {
         <BrowserRouter>
 
             <Routes>
-              <Route exact path='/' element={ <LoginForm appName={'Encuestas de Satisfacción'} redirectRoute={`/reports`} /> }/>
-              <Route exact path='/reports' element={ <Reports username={username} location={'1'} /> } />
+              <Route exact path='/admin' element={ <LoginForm appName={'Encuestas de Satisfacción'} redirectRoute={`/admin/reports`} /> }/>
+              <Route exact path='/admin/reports' element={ <Reports username={username} location={'1'} /> } />
             </Routes>
 
         </BrowserRouter>
