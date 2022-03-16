@@ -65,7 +65,7 @@ const Reports = ( {username, location} ) => {
                         endpoint={`frecuenciaVisita`}
                         startDate={startDate}
                         endDate={endDate}
-                        labels={ ['Primera visita', 'Más de 1 vez al Año', 'Más de 1 vez al Mes', 'Más de 1 vez a la Semana']}
+                        labels={ ['Más de 1 vez al Mes', 'Más de 1 vez a la Semana', 'Más de 1 vez al Año', 'Primera visita']}
                     />
 
                     <ReportPieChart
@@ -74,7 +74,7 @@ const Reports = ( {username, location} ) => {
                         endpoint={`atencionMesero`}
                         startDate={startDate}
                         endDate={endDate}
-                        labels={ [ 'Muy Mal', 'Mal', 'Regular', 'Bien', 'Excelente' ] }                               
+                        labels={ [ 'Excelente', 'Bien', 'Regular', 'Mal', 'Muy Mal' ] }                               
                     />
 
                     <ReportPieChart
@@ -83,7 +83,7 @@ const Reports = ( {username, location} ) => {
                         endpoint={`rapidezServicio`}
                         startDate={startDate}
                         endDate={endDate}
-                        labels={ [ 'Muy Mal', 'Mal', 'Regular', 'Bien', 'Excelente' ] }
+                        labels={ [ 'Excelente', 'Bien', 'Regular', 'Mal', 'Muy Mal' ] }
                     />
 
                     <ReportPieChart
@@ -92,7 +92,7 @@ const Reports = ( {username, location} ) => {
                         endpoint={`calidadComida`}
                         startDate={startDate}
                         endDate={endDate}
-                        labels={ [ 'Muy Mal', 'Mal', 'Regular', 'Bien', 'Excelente' ] }
+                        labels={ [ 'Excelente', 'Bien', 'Regular', 'Mal', 'Muy Mal' ] }
                     />
 
                     <ReportPieChart
@@ -101,7 +101,7 @@ const Reports = ( {username, location} ) => {
                         endpoint={`experienciaGeneral`}
                         startDate={startDate}
                         endDate={endDate}
-                        labels={ [ 'Muy Mal', 'Mal', 'Regular', 'Bien', 'Excelente' ] }
+                        labels={ [ 'Excelente', 'Bien', 'Regular', 'Mal', 'Muy Mal' ] }
                     />
 
                 </div>
