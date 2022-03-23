@@ -66,7 +66,7 @@ const Reports = ( {username, location} ) => {
                         endpoint={`frecuenciaVisita`}
                         startDate={startDate}
                         endDate={endDate}
-                        labels={ [ 'Primera visita', 'Más de 1 vez al Año', 'Más de 1 vez al Mes', 'Más de 1 vez a la Semana' ] }
+                        labels={ [ 'Más de 1 vez al Mes', 'Primera visita', 'Más de 1 vez a la Semana', 'Más de 1 vez al Año'] }
                     />
 
                     <ReportPieChart
