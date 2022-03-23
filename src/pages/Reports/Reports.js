@@ -6,6 +6,7 @@ import TopBar from '../../components/TopBar'
 import DateSelector from '../../components/Report/DateSelector'
 import ReportBarMeseros from '../../components/Report/ReportBarMeseros'
 import ReportPieChart from '../../components/Report/ReportPieChart'
+import ReportPieChart4 from '../../components/Report/ReportPieChart4'
 import './Reports.css'
 
 const Reports = ( {username, location} ) => {
@@ -59,13 +60,13 @@ const Reports = ( {username, location} ) => {
                         endDate={endDate}
                     />
 
-                    <ReportPieChart
+                    <ReportPieChart4
                         className='flex-fill'
                         title={`Frecuencia de Visita`}
                         endpoint={`frecuenciaVisita`}
                         startDate={startDate}
                         endDate={endDate}
-                        labels={ ['Más de 1 vez al Mes', 'Más de 1 vez a la Semana', 'Más de 1 vez al Año', 'Primera visita']}
+                        labels={ [ 'Primera visita', 'Más de 1 vez al Año', 'Más de 1 vez al Mes', 'Más de 1 vez a la Semana' ] }
                     />
 
                     <ReportPieChart

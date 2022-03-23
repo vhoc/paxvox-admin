@@ -3,23 +3,23 @@ import axios from "axios"
 import ReactApexChart from "react-apexcharts"
 import './ReportPieChart.css'
 
-const ReportPieChart = ( { title, endpoint, startDate, endDate, labels } ) => {
+const ReportPieChart4 = ( { title, endpoint, startDate, endDate, labels } ) => {
 
-    const [series, setSeries] = useState([0,0,0,0,0])
+    const [series, setSeries] = useState([0,0,0,0])
 
     const colors = [
-        '#ff3300', '#ff6600', '#ffcf24', '#99cc00', '#40bf80', 
+        '#99cc00', '#ffcf24', '#ff6600', '#ff3300', 
     ]
 
     const chartOptions = {
         series: series,
-        options: {
+          options: {
             colors: colors,
-            labels: labels,
             legend: {
+                customLegendItems: labels,
                 position: 'top',
                 horizontalAlign: 'center',
-                inverseOrder: false,
+                inverseOrder: true,
             },
             plotOptions: {
                 pie: {
@@ -69,8 +69,6 @@ const ReportPieChart = ( { title, endpoint, startDate, endDate, labels } ) => {
             const response = await axios.post( `https://paxvox.waxy.app/api/reports`, requestData, requestOptions )
             const object = await response.data
             const responseArray = Object.values(object)
-            console.log( labels )
-            console.log( responseArray )
             setSeries( responseArray )
       
         }
@@ -89,4 +87,4 @@ const ReportPieChart = ( { title, endpoint, startDate, endDate, labels } ) => {
 
 }
 
-export default ReportPieChart
+export default ReportPieChart4
