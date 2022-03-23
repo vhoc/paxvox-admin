@@ -75,7 +75,7 @@ const Reports = ( {username, location} ) => {
                         endpoint={`atencionMesero`}
                         startDate={startDate}
                         endDate={endDate}
-                        labels={ [ 'Excelente', 'Bien', 'Regular', 'Mal', 'Muy Mal' ] }                               
+                        labels={ [ 'Muy Mal', 'Mal', 'Regular', 'Bien', 'Excelente',  ] }                           
                     />
 
                     <ReportPieChart
@@ -84,7 +84,7 @@ const Reports = ( {username, location} ) => {
                         endpoint={`rapidezServicio`}
                         startDate={startDate}
                         endDate={endDate}
-                        labels={ [ 'Excelente', 'Bien', 'Regular', 'Mal', 'Muy Mal' ] }
+                        labels={ [ 'Muy Mal', 'Mal', 'Regular', 'Bien', 'Excelente',  ] }
                     />
 
                     <ReportPieChart
@@ -93,7 +93,7 @@ const Reports = ( {username, location} ) => {
                         endpoint={`calidadComida`}
                         startDate={startDate}
                         endDate={endDate}
-                        labels={ [ 'Excelente', 'Bien', 'Regular', 'Mal', 'Muy Mal' ] }
+                        labels={ [ 'Muy Mal', 'Mal', 'Regular', 'Bien', 'Excelente',  ] }
                     />
 
                     <ReportPieChart
@@ -102,7 +102,7 @@ const Reports = ( {username, location} ) => {
                         endpoint={`experienciaGeneral`}
                         startDate={startDate}
                         endDate={endDate}
-                        labels={ [ 'Excelente', 'Bien', 'Regular', 'Mal', 'Muy Mal' ] }
+                        labels={ [ 'Muy Mal', 'Mal', 'Regular', 'Bien', 'Excelente',  ] }
                     />
 
                 </div>
