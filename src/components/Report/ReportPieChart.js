@@ -8,11 +8,7 @@ const ReportPieChart = ( { title, endpoint, startDate, endDate, labels } ) => {
     const [series, setSeries] = useState([0,0,0,0,0])
 
     const colors = [
-        '#ff3300',
-        '#ff6600',
-        '#ffcf24',
-        '#99cc00',
-        '#40bf80'
+        '#ff3300', '#ff6600', '#ffcf24', '#99cc00', '#40bf80', 
     ]
 
     const chartOptions = {
