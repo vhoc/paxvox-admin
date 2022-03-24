@@ -17,7 +17,7 @@ const TopBar = ( ) => {
     
     const logout = () => {
         localStorage.clear()
-        goTo('/')
+        goTo('/admin')
     }
 
     useEffect( () => {
@@ -31,7 +31,7 @@ const TopBar = ( ) => {
     return (
 
             <Navbar className={classes.topbar} sticky='top'>
-                    <Navbar.Brand href="/">
+                    <Navbar.Brand href="/admin">
                         <small>{localStorage.getItem('location_name')}</small>
                     </Navbar.Brand>
 
@@ -44,7 +44,7 @@ const TopBar = ( ) => {
                         ) : (
                             <div className={classes.rightPane}>
                                 {error && (
-                                    <Navigate to="/" />
+                                    <Navigate to="/admin" />
                                 )}
                                 <div>{auth && <div><span>{auth.username}</span><Button variant='link' onClick={() => logout()}>Salir</Button></div>}</div>
                             </div>
