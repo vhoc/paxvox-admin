@@ -69,8 +69,8 @@ const ReportPieChart = ( { title, endpoint, startDate, endDate, labels } ) => {
             const response = await axios.post( `https://paxvox.waxy.app/api/reports`, requestData, requestOptions )
             const object = await response.data
             const responseArray = Object.values(object)
-            console.log( labels )
-            console.log( responseArray )
+            //console.log( labels )
+            //console.log( responseArray )
             setSeries( responseArray )
       
         }
