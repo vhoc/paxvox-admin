@@ -4,7 +4,7 @@ import Chart from 'react-apexcharts'
 
 import './ReportBarMeseros.css'
 
-const ReportBarMeseros = ( { startDate, endDate } )=> {
+const ReportBarMeseros = ( { startDate, endDate, locationId, title } )=> {
 
     const [meserosNames, setMeserosNames] = useState([])
     const [meserosCount, setMeserosCount] = useState([])
@@ -41,7 +41,7 @@ const ReportBarMeseros = ( { startDate, endDate } )=> {
             setMeserosCount([])
     
             const requestData = {
-                "id_location": 1,
+                "id_location": locationId,
                 "start_date":startDate.toISOString(),
                 "end_date":endDate.toISOString()
             }
@@ -60,12 +60,12 @@ const ReportBarMeseros = ( { startDate, endDate } )=> {
     
         }
         getData()
-    }, [startDate, endDate])
+    }, [startDate, endDate, locationId])
 
     return (
 
         <div className='chartbox border d-flex flex-column align-items-center m-1 p-1 pt-3 rounded shadow'>
-            <h5>Participación de Meseros</h5>
+            <h5>{ title }</h5>
             <Chart options={chartOptions.options} series={chartOptions.series} type={"bar"} width={'400px'} />
         </div>
         

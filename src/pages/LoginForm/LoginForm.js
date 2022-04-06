@@ -24,13 +24,15 @@ const LoginForm = ( {appName, redirectRoute} ) => {
             if (response !== null) {
                 localStorage.setItem('token', `Bearer ${response.token}`)
                 localStorage.setItem('location_name', `${response.name_location}`)
+                localStorage.setItem('location', `${ JSON.stringify(response.location) }`)
                 goTo( redirectRoute, {replace: true} )
             }
         } catch (err) {
             const error = await err
             if (filledForm && error) {
                 switch (error.response.status) {
-                    case 422: Swal.fire("Error", "Se requiere ingresar el usuario y la contraseña correctamente", "error" )
+                    case 422:
+                        Swal.fire("Error", "Se requiere ingresar el usuario y la contraseña correctamente", "error" )
                         break;
                     case 401:
                         Swal.fire("Error", "Se ha ingresado un usuario o contraseña incorrecto(s).", "error")

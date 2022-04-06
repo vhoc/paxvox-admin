@@ -4,14 +4,15 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import LoginForm from './pages/LoginForm/LoginForm';
 import Reports from './pages/Reports/Reports';
 
-const RoutesComponent = ( {username} ) => {
+const RoutesComponent = ( { username } ) => {
+
     return (
 
         <BrowserRouter basename='/admin/'>
 
             <Routes>
               <Route exact path='/' element={ <LoginForm appName={'Encuestas de Satisfacción'} redirectRoute={`/reports`} /> }/>
-              <Route exact path='/reports' element={ <Reports username={username} location={'1'} /> } />
+              <Route exact path='/reports' element={ <Reports username={username} /> } />
             </Routes>
 
         </BrowserRouter>
