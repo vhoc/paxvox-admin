@@ -52,7 +52,7 @@ const ReportBar = ( { startDate, endDate, locationId, title, endpoint } )=> {
       
             const response = await axios.post( `https://paxvox.waxy.app/api/delivery-reports`, requestData, requestOptions )
             const object = await response.data
-            console.log(response.data)
+            //console.log(response.data)
             const responseArray = Object.values(object)
             const keys = Object.keys(object)
             //console.log( labels )
@@ -62,7 +62,7 @@ const ReportBar = ( { startDate, endDate, locationId, title, endpoint } )=> {
         }
 
         getData()
-    }, [startDate, endDate, locationId])
+    }, [startDate, endDate, locationId, endpoint])
 
     return (
 

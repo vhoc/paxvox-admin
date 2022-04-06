@@ -9,7 +9,6 @@ import ReportBarCiudades from '../../components/Report/ReportBarCiudades'
 import ReportBar from '../../components/Report/ReportBar'
 import ReportPieChart from '../../components/Report/ReportPieChart'
 import ReportPieChart4 from '../../components/Report/ReportPieChart4'
-import ReportPie from '../../components/Report/ReportPie'
 import './Reports.css'
 
 const Reports = ( {username } ) => {
