@@ -6,6 +6,7 @@ import TopBar from '../../components/TopBar'
 import DateSelector from '../../components/Report/DateSelector'
 import ReportBarMeseros from '../../components/Report/ReportBarMeseros'
 import ReportBarCiudades from '../../components/Report/ReportBarCiudades'
+import ReportBar from '../../components/Report/ReportBar'
 import ReportPieChart from '../../components/Report/ReportPieChart'
 import ReportPieChart4 from '../../components/Report/ReportPieChart4'
 import ReportPie from '../../components/Report/ReportPie'
@@ -122,28 +123,49 @@ const Reports = ( {username } ) => {
                                     title="Ciudades"
                                 />
 
-                                <ReportPie
+                                <ReportBar
                                     className='flex-fill'
-                                    locationId={ location[0].id }
-                                    title={`Forma del Pedido`}
-                                    endpoint={`formaPedido`}
                                     startDate={startDate}
                                     endDate={endDate}
-                                    //labels={ [ 'Muy Mal', 'Mal', 'Regular', 'Bien'  ] }
-                                    //seriesValues={ [0,0,0,0] }
-                                    colors={ [ '#128c7e', '#4267b2', '#717171', '#704981', '#a53131' ] }
+                                    locationId={ location[0].id }
+                                    title="Forma del Pedido"
+                                    endpoint={`formaPedido`}
                                 />
 
-                                <ReportPie
+                                <ReportBar
                                     className='flex-fill'
-                                    locationId={ location[0].id }
-                                    title={`Tiempo de Entrega`}
-                                    endpoint={`tiempoEntrega`}
                                     startDate={startDate}
                                     endDate={endDate}
-                                    //labels={ [ 'Muy Mal', 'Mal', 'Regular', 'Bien'  ] }
-                                    //seriesValues={ [0,0,0,0] }
-                                    colors={ [ '#128c7e', '#4267b2', '#717171', '#704981', '#a53131' ] }
+                                    locationId={ location[0].id }
+                                    title="Tiempo de Entrega"
+                                    endpoint={`tiempoEntrega`}
+                                />
+
+                                <ReportBar
+                                    className='flex-fill'
+                                    startDate={startDate}
+                                    endDate={endDate}
+                                    locationId={ location[0].id }
+                                    title={`Calidad en la Atención`}
+                                    endpoint={`calidadAtencion`}
+                                />
+
+                                <ReportBar
+                                    className='flex-fill'
+                                    startDate={startDate}
+                                    endDate={endDate}
+                                    locationId={ location[0].id }
+                                    title={`Sazon y presentación`}
+                                    endpoint={`calidadComida`}
+                                />
+
+                                <ReportBar
+                                    className='flex-fill'
+                                    startDate={startDate}
+                                    endDate={endDate}
+                                    locationId={ location[0].id }
+                                    title={`Calificacion al repartidor`}
+                                    endpoint={`calificacionRepartidor`}
                                 />
 
                             </>

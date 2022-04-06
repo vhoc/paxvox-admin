@@ -6,7 +6,7 @@ import './ReportPieChart.css'
 const ReportPie = ( { title, locationId, endpoint, startDate, endDate, colors } ) => {
 
     const [series, setSeries] = useState([])
-    const [labels, setLabels] = useState(['WhatsApp', 'App móvil'])
+    const [labels, setLabels] = useState([])
 
     const chartOptions = {
         series: series,
